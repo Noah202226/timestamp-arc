@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### TIMESTAMPS by ARC
+
+# A simple app that help you track and calculate your working hours.
 
 ## Getting Started
 
