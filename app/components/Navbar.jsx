@@ -10,12 +10,14 @@ import {
 } from "firebase/auth";
 import { db, auth } from "../firebase";
 import userStore from "../store/userStore";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import * as XLSX from "xlsx";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [islLoggedIn, setIsLoggedIn] = useState(false);
-  const { user, setUser } = userStore();
+  const { user, setUser, userRecords, setUserRecords } = userStore();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -117,12 +119,25 @@ const Navbar = () => {
           <a href="#" className="block text-gray-300 hover:text-white p-2">
             Records
           </a>
-          <a href="#" className="block text-gray-300 hover:text-white p-2">
-            About
-          </a>
-          <a href="#" className="block text-gray-300 hover:text-white p-2">
-            Logout
-          </a>
+          {islLoggedIn ? (
+            <>
+              <button
+                onClick={() => signOut(auth)}
+                className="text-gray-300 hover:text-white"
+              >
+                Logout
+              </button>
+
+              <p>"USER: "{user?.displayName}</p>
+            </>
+          ) : (
+            <button
+              onClick={signInWithGoogle}
+              className="text-gray-300 hover:text-white"
+            >
+              Login
+            </button>
+          )}
         </div>
       )}
     </nav>
